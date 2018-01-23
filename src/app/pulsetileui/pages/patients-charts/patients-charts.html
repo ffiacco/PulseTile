@@ -16,6 +16,7 @@
 <!-- START Main Content Area -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -32,38 +33,55 @@
             position: relative;
             right: 10px;
         }
+        
         .dropdown-content {
             display: none;
             position: absolute;
             top: 50px;
-            right:27px;
+            right: 27px;
             background-color: #f9f9f9;
             min-width: 160px;
             overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
             z-index: 4;
         }
-
-        .dropbtn:hover, .dropbtn:focus {
+        
+        .dropbtn:hover,
+        .dropbtn:focus {
             background-color: #146A2D;
         }
-
+        
         .dropdown {
             position: relative;
             display: inline-block;
         }
-
-
+        
         .dropdown-content a {
             color: #1A893A;
             padding: 1px 10px;
             text-decoration: none;
             display: block;
         }
-
-        .dropdown a:hover {background-color: #f1f1f1}
-
-        .show {display:block;}
+        
+        .dropdown a:hover {
+            background-color: #f1f1f1
+        }
+        
+        .show {
+            display: block;
+        }
+        
+        #iframe-link {
+            width: 100%;
+            float: left;
+            text-align: center;
+        }
+        
+        div.sub,
+        iframe {
+            margin: 0 auto;
+            background-color: #777;
+        }
     </style>
 </head>
 <div class="row">
@@ -127,9 +145,8 @@
                     <div class="chart-block" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
                         <div class="chart-title-group">
                             <h2 class="chart-title">SMART-on-FHIR Name Placeholder</h2>
-                            <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae consectetur tortor. Ut in lorem quis ipsum consectetur blandit nec quis lectus. Suspendisse ullamcorper facilisis posuere. Nulla accumsan blandit efficitur. Phasellus maximus mollis augue, vitae ornare nisl. Phasellus a euismod nibh. Quisque aliquet ullamcorper porttitor.</p>
-                                <p>Aliquam dapibus neque vel sollicitudin convallis. Nullam ut dui ligula. Nullam ornare velit metus, in sagittis nunc facilisis et. Nam hendrerit sapien ut enim blandit pellentesque. Vestibulum ornare ex dignissim eleifend efficitur. Vivamus vel tristique sapien, quis tincidunt lorem. Mauris commodo elit massa, et pharetra risus maximus id. Nunc tempus mi auctor laoreet egestas.</p>
+                            <div id="iframe-link">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/BbBZbo2fMus" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -141,23 +158,23 @@
 
 
 <script>
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
     }
-  }
-}
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
 </script>
 
 </html>
