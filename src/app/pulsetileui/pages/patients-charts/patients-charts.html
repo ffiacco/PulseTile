@@ -22,67 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        .dropbtn {
-            background-color: #1A893A;
-            color: white;
-            padding: 5px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            right: 10px;
-        }
-        
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 50px;
-            right: 27px;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 4;
-        }
-        
-        .dropbtn:hover,
-        .dropbtn:focus {
-            background-color: #146A2D;
-        }
-        
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .dropdown-content a {
-            color: #1A893A;
-            padding: 1px 10px;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .dropdown a:hover {
-            background-color: #f1f1f1
-        }
-        
-        .show {
-            display: block;
-        }
-        
-        #iframe-link {
-            width: 100%;
-            float: left;
-            text-align: center;
-        }
-        
-        div.sub,
-        iframe {
-            margin: 0 auto;
-            background-color: #777;
-        }
-    </style>
+
 </head>
 <div class="row">
     <div class="col-xs-12 col-md-6">
@@ -131,8 +71,8 @@
             <div class="panel-heading">
                 <h3 class="panel-title">
                     <i class="fa fa-bar-chart"></i> SMART-on-FHIR Tile
-                    <button onclick="myFunction()" class="dropbtn" style="float: right;"><i class="fa fa-bars"></i> Smart on Fhir Apps</button>
-                    <div id="myDropdown" class="dropdown-content" style="float:right;">
+                    <button class="dropbtn"><i class="fa fa-bars"></i> Smart on Fhir Apps</button>
+                    <div id="myDropdown" class="dropdown-content" style=>
                         <a href="#">App1</a>
                         <a href="#">App2</a>
                         <a href="#">App3</a>
@@ -146,7 +86,7 @@
                         <div class="chart-title-group">
                             <h2 class="chart-title">SMART-on-FHIR Name Placeholder</h2>
                             <div id="iframe-link">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/BbBZbo2fMus" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                <iframe width="100%" height="600px" src="http://localhost:8000/"></iframe>
                             </div>
                         </div>
                     </div>
@@ -155,26 +95,5 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-</script>
 
 </html>

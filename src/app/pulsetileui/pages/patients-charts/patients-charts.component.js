@@ -20,6 +20,26 @@ class PatientsChartsController {
     serviceRequests.publisher('headerTitle', {title: 'System Dashboard', isShowTitle: true});
     serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
     $scope.isTouchDevice = deviceDetector.detectDevice();
+
+    var $dropbtn = $('.dropbtn');
+    $dropbtn.on('click', function(){
+      $("#myDropdown").toggleClass("show");
+    });
+
+    window.onclick = function (event) {
+      if (!event.target.matches('.dropbtn')) {
+
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                  openDropdown.classList.remove('show');
+              }
+          }
+      }
+  }
+
     //click on "Spine Lookup"
     this.goToLookUp = function () {
       $state.go('patients-lookup');
