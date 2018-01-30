@@ -16,248 +16,248 @@
 let templatePatientsCharts = require('./patients-charts.html');
 
 class PatientsChartsController {
-  constructor($scope, $state, $window, patientsActions, $ngRedux, serviceRequests, $timeout, Patient, deviceDetector) {
-    serviceRequests.publisher('headerTitle', {title: 'System Dashboard', isShowTitle: true});
-    serviceRequests.publisher('routeState', {state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts'});
-    $scope.isTouchDevice = deviceDetector.detectDevice();
+    constructor($scope, $state, $window, patientsActions, $ngRedux, serviceRequests, $timeout, Patient, deviceDetector) {
+        serviceRequests.publisher('headerTitle', { title: 'System Dashboard', isShowTitle: true });
+        serviceRequests.publisher('routeState', { state: $state.router.globals.current.views, breadcrumbs: $state.router.globals.current.breadcrumbs, name: 'patients-charts' });
+        $scope.isTouchDevice = deviceDetector.detectDevice();
 
-    var $dropbtn = $('.dropbtn');
-    $dropbtn.on('click', function(){
-      $("#myDropdown").toggleClass("show");
-    });
+        var $dropbtn = $('.dropbtn');
+        $dropbtn.on('click', function() {
+            $("#myDropdown").toggleClass("show");
+        });
 
-    window.onclick = function (event) {
-      if (!event.target.matches('.dropbtn')) {
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
 
-          var dropdowns = document.getElementsByClassName("dropdown-content");
-          var i;
-          for (i = 0; i < dropdowns.length; i++) {
-              var openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                  openDropdown.classList.remove('show');
-              }
-          }
-      }
-  }
-
-    //click on "Spine Lookup"
-    this.goToLookUp = function () {
-      $state.go('patients-lookup');
-    };
-    var getOption = function (borderColor, backgroundColor) {
-      var enabledTooltips = !$scope.isTouchDevice;
-      return {
-          capBezierPoints: false,
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false
-          },
-          elements: {
-            rectangle: {
-              backgroundColor: backgroundColor,
-              borderColor: borderColor,
-              borderWidth: 1
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
             }
-          },
-          tooltips: {
-            enabled: enabledTooltips,
-            mode: 'label',
-            titleMarginBottom: 15,
-            bodySpacing: 10,
-            xPadding: 10,
-            yPadding: 10,
-            callbacks: {
-              label: function(tooltipItem) {
-                return '  Patients : ' + tooltipItem.yLabel;
-              }
-            }
-          },
-          scales: {
-              xAxes: [{
-                  stacked: true
-              }],
-              yAxes: [{
-                  stacked: true
-              }]
-          }
-      }
-    };
-
-    var goToPatients = function (row, chartType) {
-      /* istanbul ignore next  */
-      switch (chartType) {
-        case 'all':
-          $state.go('patients-list');
-          break;
-        case 'age':
-          $state.go('patients-list', { ageRange: row.series });
-          break;
-        case 'summary':
-          if (row.series === 'All') {
-            row.series = null;
-          }
-          $state.go('patients-list', { department: row.series });
-          break;
-        default:
-          $state.go('patients-list');
-          break;
-      }
-    };
-
-    var createChart = function (options) {
-      /* istanbul ignore next  */
-      if (options && options.id && options.data) {
-        var canvas, ctx, barChart;
-        var labels = [];
-        var datasets = [];
-
-        if (options.data) {
-          for (var i = 0; i < options.data.length; i++) {
-            labels.push(options.data[i].series);
-            datasets.push(options.data[i].value);
-          }
         }
 
-        $timeout(function () {
-          canvas = document.getElementById(options.id);
-          
-          if (canvas) {
-            ctx = canvas.getContext("2d");
-            barChart = new $window.Chart(ctx, {
-                type: 'bar',
-                data: {
-                  labels: labels,
-                  datasets: [{data: datasets}]
+        //click on "Spine Lookup"
+        this.goToLookUp = function() {
+            $state.go('patients-lookup');
+        };
+        var getOption = function(borderColor, backgroundColor) {
+            var enabledTooltips = !$scope.isTouchDevice;
+            return {
+                capBezierPoints: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false
                 },
-                options: getOption(options.borderColor, options.backgroundColor)
-            });
-            if (options.onClick) {
-              canvas.onclick = options.onClick(barChart);
+                elements: {
+                    rectangle: {
+                        backgroundColor: backgroundColor,
+                        borderColor: borderColor,
+                        borderWidth: 1
+                    }
+                },
+                tooltips: {
+                    enabled: enabledTooltips,
+                    mode: 'label',
+                    titleMarginBottom: 15,
+                    bodySpacing: 10,
+                    xPadding: 10,
+                    yPadding: 10,
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return '  Patients : ' + tooltipItem.yLabel;
+                        }
+                    }
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: true
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
             }
-          }
-        }, 0);
-      }
-    };
+        };
 
-    var self = this;
-
-    let _ = require('underscore');
-
-    this.goToPatientsList = function () {
-      $state.go('patients-list');
-    };
-
-
-
-    this.getPatients = function (patients) {
-      /* istanbul ignore if  */
-      if (patients) {
-        var summaries = {};
-        var changedPatients = [];
-
-        angular.forEach(patients, function (patient) {
-          var curPatient = new Patient.patient(patient);
-          changedPatients.push(curPatient);
-        });
-        
-        summaries.age = _.chain(changedPatients)
-          .filter(function (patient) {
-            return !!patient.age;
-          })
-          .countBy(function (patient) {
-            return patient.ageRange;
-          })
-          .map(function (value, key) {
-            return {
-              series: key,
-              value: value
-            };
-          })
-          .sortBy(function (value) {
-            return value.series
-          })
-          .value();
-
-        summaries.department = _.chain(changedPatients)
-          .filter(function (patient) {
-            return !!patient.department;
-          })
-          .countBy(function (patient) {
-            return patient.department;
-          })
-          .map(function (value, key) {
-            return {
-              series: key,
-              value: value
-            };
-          })
-          .sortBy(function (value) {
-            return value.series;
-          })
-          .value();
-
-        createChart({
-          id: "chart-age", 
-          data: summaries.age, 
-          borderColor: 'rgba(126, 41, 205,1)',
-          backgroundColor: 'rgba(126, 41, 205,0.3)',
-          onClick: function (chart) {
-            return function (ev) {
-              var activePoint = chart.getElementAtEvent(ev)[0];
-
-              if (activePoint) {
-                goToPatients(summaries.age[activePoint._index], 'age');
-              }
+        var goToPatients = function(row, chartType) {
+            /* istanbul ignore next  */
+            switch (chartType) {
+                case 'all':
+                    $state.go('patients-list');
+                    break;
+                case 'age':
+                    $state.go('patients-list', { ageRange: row.series });
+                    break;
+                case 'summary':
+                    if (row.series === 'All') {
+                        row.series = null;
+                    }
+                    $state.go('patients-list', { department: row.series });
+                    break;
+                default:
+                    $state.go('patients-list');
+                    break;
             }
-          }
-        });
+        };
 
-        createChart({
-          id: "chart-department", 
-          data: summaries.department, 
-          borderColor: 'rgba(36, 161, 116,1)',
-          backgroundColor: 'rgba(36, 161, 116,0.3)',
-          onClick: function (chart) {
-            return function (ev) {
-              var activePoint = chart.getElementAtEvent(ev)[0];
+        var createChart = function(options) {
+            /* istanbul ignore next  */
+            if (options && options.id && options.data) {
+                var canvas, ctx, barChart;
+                var labels = [];
+                var datasets = [];
 
-              if (activePoint) {
-                goToPatients(summaries.department[activePoint._index], 'summary');
-              }
+                if (options.data) {
+                    for (var i = 0; i < options.data.length; i++) {
+                        labels.push(options.data[i].series);
+                        datasets.push(options.data[i].value);
+                    }
+                }
+
+                $timeout(function() {
+                    canvas = document.getElementById(options.id);
+
+                    if (canvas) {
+                        ctx = canvas.getContext("2d");
+                        barChart = new $window.Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: labels,
+                                datasets: [{ data: datasets }]
+                            },
+                            options: getOption(options.borderColor, options.backgroundColor)
+                        });
+                        if (options.onClick) {
+                            canvas.onclick = options.onClick(barChart);
+                        }
+                    }
+                }, 0);
             }
-          }
-        });
+        };
 
-        return summaries;
-      } else {
-        return true;
-      }
-    };
+        var self = this;
 
-    let unsubscribe = $ngRedux.connect(state => ({
-      setPatients: self.getPatients(state.patients.data)
-    }))(this);
+        let _ = require('underscore');
 
-    $scope.$on('$destroy', unsubscribe);
+        this.goToPatientsList = function() {
+            $state.go('patients-list');
+        };
 
-    
-    /* istanbul ignore next */
-    $scope.setUserData = function (data) {
-      $scope.user = data.userData;
-      
-      if ($scope.user.role == 'IDCR') {
-        patientsActions.loadPatients();
-      }
-    };
-    serviceRequests.subscriber('setUserData', $scope.setUserData);
-    
-  }
+
+
+        this.getPatients = function(patients) {
+            /* istanbul ignore if  */
+            if (patients) {
+                var summaries = {};
+                var changedPatients = [];
+
+                angular.forEach(patients, function(patient) {
+                    var curPatient = new Patient.patient(patient);
+                    changedPatients.push(curPatient);
+                });
+
+                summaries.age = _.chain(changedPatients)
+                    .filter(function(patient) {
+                        return !!patient.age;
+                    })
+                    .countBy(function(patient) {
+                        return patient.ageRange;
+                    })
+                    .map(function(value, key) {
+                        return {
+                            series: key,
+                            value: value
+                        };
+                    })
+                    .sortBy(function(value) {
+                        return value.series
+                    })
+                    .value();
+
+                summaries.department = _.chain(changedPatients)
+                    .filter(function(patient) {
+                        return !!patient.department;
+                    })
+                    .countBy(function(patient) {
+                        return patient.department;
+                    })
+                    .map(function(value, key) {
+                        return {
+                            series: key,
+                            value: value
+                        };
+                    })
+                    .sortBy(function(value) {
+                        return value.series;
+                    })
+                    .value();
+
+                createChart({
+                    id: "chart-age",
+                    data: summaries.age,
+                    borderColor: 'rgba(126, 41, 205,1)',
+                    backgroundColor: 'rgba(126, 41, 205,0.3)',
+                    onClick: function(chart) {
+                        return function(ev) {
+                            var activePoint = chart.getElementAtEvent(ev)[0];
+
+                            if (activePoint) {
+                                goToPatients(summaries.age[activePoint._index], 'age');
+                            }
+                        }
+                    }
+                });
+
+                createChart({
+                    id: "chart-department",
+                    data: summaries.department,
+                    borderColor: 'rgba(36, 161, 116,1)',
+                    backgroundColor: 'rgba(36, 161, 116,0.3)',
+                    onClick: function(chart) {
+                        return function(ev) {
+                            var activePoint = chart.getElementAtEvent(ev)[0];
+
+                            if (activePoint) {
+                                goToPatients(summaries.department[activePoint._index], 'summary');
+                            }
+                        }
+                    }
+                });
+
+                return summaries;
+            } else {
+                return true;
+            }
+        };
+
+        let unsubscribe = $ngRedux.connect(state => ({
+            setPatients: self.getPatients(state.patients.data)
+        }))(this);
+
+        $scope.$on('$destroy', unsubscribe);
+
+
+        /* istanbul ignore next */
+        $scope.setUserData = function(data) {
+            $scope.user = data.userData;
+
+            if ($scope.user.role == 'IDCR') {
+                patientsActions.loadPatients();
+            }
+        };
+        serviceRequests.subscriber('setUserData', $scope.setUserData);
+
+    }
 }
 
 const PatientsChartsComponent = {
-  template: templatePatientsCharts,
-  controller: PatientsChartsController
+    template: templatePatientsCharts,
+    controller: PatientsChartsController
 };
 
 PatientsChartsController.$inject = ['$scope', '$state', '$window', 'patientsActions', '$ngRedux', 'serviceRequests', '$timeout', 'Patient', 'deviceDetector'];
@@ -269,15 +269,19 @@ function myFunction() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
+    if (!event.target.matches('.dropbtn')) {
 
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
     }
-  }
+}
+
+function switchView(link) {
+    document.getElementById("project-view").src = link;
 }
