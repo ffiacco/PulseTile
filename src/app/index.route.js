@@ -111,6 +111,22 @@ function routeConfig($stateProvider, $urlRouterProvider) {
           state: 'patients-summary'
         }]
       })
+      .state('smart-on-fhir', {
+        url: '/patients/{patientId:int}/smart-on-fhir',
+        views: {
+          banner: {template: '<patients-banner-component></patients-banner-component>'},
+          actions: {template: '<patients-sidebar-component></patients-sidebar-component>'},
+          main: {template: '<smart-on-fhir-component><smart-on-fhir-component>'}
+        },
+        params: {patientId: null},
+        breadcrumbs: [{
+          title: 'Patient Listings',
+          state: 'patients-list'
+        }, {
+          title: 'Smart On FHIR',
+          state: 'smart-on-fhir'
+        }]
+      })
       .state('search-report', {
         url: '/search-report?searchString',
         views: {

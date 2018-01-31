@@ -55,6 +55,7 @@ import ProfileComponent from './pulsetileui/pages/profile/profile.component';
 import HeaderComponent from './pulsetileui/header-bar/header.component.js';
 import PatientsChartsComponent from './pulsetileui/pages/patients-charts/patients-charts.component';
 import PatientsSummaryComponent from './pulsetileui/pages/patient-summary/patients-summary.component';
+import SmartOnFhirComponent from './pulsetileui/pages/smart-on-fhir/smart-on-fhir.component';
 import PatientsListFullComponent from './pulsetileui/pages/patients-list-full/patients-list-full.component';
 import PatientsSidebarComponent from './pulsetileui/pages/patients-detail/patients-sidebar.component';
 import PatientsBannerComponent from './pulsetileui/pages/patients-detail/patients-banner.component';
@@ -145,6 +146,7 @@ let app = angular
     .component('headerComponent', HeaderComponent)
     .component('patientsChartsComponent', PatientsChartsComponent)
     .component('patientsSummaryComponent', PatientsSummaryComponent)
+    .component('smartOnFhirComponent', SmartOnFhirComponent)
     .component('patientsSidebarComponent', PatientsSidebarComponent)
     .component('patientsBannerComponent', PatientsBannerComponent)   
     .component('patientsListFullComponent', PatientsListFullComponent)    

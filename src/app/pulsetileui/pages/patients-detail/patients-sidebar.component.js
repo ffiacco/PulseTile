@@ -23,7 +23,12 @@ class PatientsSidebarController {
         name: 'summary',
         link: 'patients-summary',
         title: 'Patient Summary'
-      }
+      },
+      {
+        name: 'smart-on-fhir',
+        link: 'smart-on-fhir',
+        title: 'Smart On FHIR'
+      },
     ];
 
     plugins.forEach((plugin)=>{

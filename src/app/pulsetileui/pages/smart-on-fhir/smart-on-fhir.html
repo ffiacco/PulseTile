@@ -1,0 +1,28 @@
+<div class="col-xs-12">
+    <div class="panel panel-secondary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <i class="fa fa-bar-chart"></i> SMART-on-FHIR Tile
+                <button class="dropbtn"><i class="fa fa-bars"></i> Smart on Fhir Apps</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a class="list-group-item" data-url="https://bp-centile.azurewebsites.net/index.html">Blood Pressure Centiles</a>
+                    <a class="list-group-item" data-url="https://bilirubin-risk-chart.hspconsortium.org/app.html">Bilirubin Risk</a>
+                    <a class="list-group-item" data-url="https://sb-apps.smarthealthit.org/apps/cardiac-risk/">Cardiac Risk</a>
+                </div>
+
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body-inner">
+                <div class="chart-block" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
+                    <div class="chart-title-group">
+                        <h2 class="chart-title">SMART-on-FHIR Name Placeholder</h2>
+                        <div id="iframe-link">
+                            <iframe class="app-container" width="100%" height="600px" src="https://bp-centile.azurewebsites.net/index.html"> </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
