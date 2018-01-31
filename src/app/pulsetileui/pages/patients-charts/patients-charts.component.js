@@ -26,6 +26,13 @@ class PatientsChartsController {
             $("#myDropdown").toggleClass("show");
         });
 
+        var $dropdownElement = $('.list-group-item');
+        $dropdownElement.on('click', function(){
+          
+              $(".app-container").attr('src', $(this).attr('data-url'));
+          
+        });
+
         window.onclick = function(event) {
             if (!event.target.matches('.dropbtn')) {
 
