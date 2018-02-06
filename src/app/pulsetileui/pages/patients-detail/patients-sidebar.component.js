@@ -43,10 +43,9 @@ class PatientsSidebarController {
     if ($scope.nameState === this.linksCollection[0].link) {
       $scope.partsNameState[0] = this.linksCollection[0].link;
     } 
-    //Deleted by: e.binshaflout ,, Ignor this part it prevents tab SMART on FHIR from activation when press on the link
-    /*else {
+    else {
       $scope.partsNameState = $scope.nameState.split(' ');
-    }*/
+    }
 
     $scope.isActiveItem = function (itemLink) {
       return $scope.partsNameState[0] == itemLink;
