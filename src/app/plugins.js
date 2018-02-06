@@ -35,7 +35,6 @@ import medication from './pulsetileui/pages/medications/index';
 // import transferOfCare from './pulsetileui/pages/transfer-of-care/index';
 // import vaccinations from './pulsetileui/pages/vaccinations/index';
 // import vitals from './pulsetileui/pages/vitals/index';
-
 export default [
   diagnoses,
   medication,

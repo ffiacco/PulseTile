@@ -28,7 +28,7 @@ class PatientsSidebarController {
         name: 'smart-on-fhir',
         link: 'smart-on-fhir',
         title: 'Smart On FHIR'
-      },
+      }
     ];
 
     plugins.forEach((plugin)=>{
@@ -42,9 +42,11 @@ class PatientsSidebarController {
     
     if ($scope.nameState === this.linksCollection[0].link) {
       $scope.partsNameState[0] = this.linksCollection[0].link;
-    } else {
-      $scope.partsNameState = $scope.nameState.split('-');
-    }
+    } 
+    //Deleted by: e.binshaflout ,, Ignor this part it prevents tab SMART on FHIR from activation when press on the link
+    /*else {
+      $scope.partsNameState = $scope.nameState.split(' ');
+    }*/
 
     $scope.isActiveItem = function (itemLink) {
       return $scope.partsNameState[0] == itemLink;
