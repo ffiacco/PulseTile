@@ -25,11 +25,11 @@ To develop and run the application locally you must have the following installed
 
 ```
  - NodeJS
- - A running version of The Ripple Middleware listening on port 19191
+ - A running version of The Ripple Middleware listening on port 19191 (you can clone ripple-qewd from https://github.com/RippleOSI/Ripple-Qewd and follow the build instructions in teh ReadMe file)
 ```
 ### Installing
 
-The first step to setup the application locally should be the following: 
+After making sure to have both NodeJS and Bower installed globally on your machine, the first step to setup the application locally should be the following: 
 ```
 npm install
 bower install
