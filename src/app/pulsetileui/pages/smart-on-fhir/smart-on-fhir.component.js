@@ -13,6 +13,7 @@ class SmartOnFhirController {
         var $dropdownElement = $('.list-group-item');
         $dropdownElement.on('click', function(){
               $(".app-container").attr('src', $(this).attr('data-url'));
+              $(".chart-title").html($(this).attr('data-name'));
         });
 
         window.onclick = function(event) {

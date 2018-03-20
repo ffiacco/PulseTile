@@ -5,10 +5,10 @@
                 <i class="fa fa-bar-chart"></i> SMART-on-FHIR Tile
                 <button class="dropbtn"><i class="fa fa-bars"></i> Smart on Fhir Apps</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <a class="list-group-item" data-url="https://bp-centile.azurewebsites.net/index.html">Blood Pressure Centiles</a>
-                    <a class="list-group-item" data-url="http://localhost:8000/launch.html?fhirServiceUrl=http://hapi.fhir.org/baseDstu3&patientId=1203706">Authorization Demo</a>
-                    <a class="list-group-item" data-url="https://bilirubin-risk-chart.hspconsortium.org/app.html">Growth Chart</a>
-                    <a class="list-group-item" data-url="http://localhost:8001/launch.html?fhirServiceUrl=http://hapi.fhir.org/baseDstu3&patientId=1203706">Cardiac Risk</a>
+                    <a class="list-group-item" data-name="Cardiac Risk" data-url="http://localhost:8001/launch.html?fhirServiceUrl=http://hapi.fhir.org/baseDstu3&patientId=1203706">Cardiac Risk</a>
+                    <a class="list-group-item" data-name="Blood Pressure Centiles" data-url="https://bp-centile.azurewebsites.net/index.html">Blood Pressure Centiles</a>
+                    <a class="list-group-item" data-name="Blood Pressure Centiles (Auth0 Mode)" data-url="http://localhost:8000/launch.html?fhirServiceUrl=http://hapi.fhir.org/baseDstu3&patientId=1203706">Authorization Demo</a>
+                    <a class="list-group-item" data-name="Growth Chart" data-url="http://localhost:9001/launch.html?fhirServiceUrl=http://hapi.fhir.org/baseDstu3&patientId=1203706">Growth Chart</a>
                 </div>
 
             </h3>
@@ -17,9 +17,9 @@
             <div class="panel-body-inner">
                 <div class="chart-block" ng-class="{hoverChart: hoverSettings}" ng-mouseenter="hoverSettings = true" ng-mouseleave="hoverSettings = false">
                     <div class="chart-title-group">
-                        <h2 class="chart-title">SMART-on-FHIR Name Placeholder</h2>
+                        <h2 class="chart-title">Cardiac Risk</h2>
                         <div id="iframe-link">
-                            <iframe class="app-container" width="100%" height="600px" src="https://bp-centile.azurewebsites.net/index.html"> </iframe>
+                            <iframe class="app-container" width="100%" height="600px" src="http://localhost:8001/launch.html?fhirServiceUrl=http://hapi.fhir.org/baseDstu3&patientId=1203706"> </iframe>
                         </div>
                     </div>
                 </div>
